@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/shoppingCartAPI/shoppingCartAPI/shoppingCartAPI.csproj": {}
+    "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/shoppingCartAPI.csproj": {}
   },
   "projects": {
-    "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/shoppingCartAPI/shoppingCartAPI/shoppingCartAPI.csproj": {
+    "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/shoppingCartAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/shoppingCartAPI/shoppingCartAPI/shoppingCartAPI.csproj",
+        "projectUniqueName": "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/shoppingCartAPI.csproj",
         "projectName": "shoppingCartAPI",
-        "projectPath": "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/shoppingCartAPI/shoppingCartAPI/shoppingCartAPI.csproj",
+        "projectPath": "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/shoppingCartAPI.csproj",
         "packagesPath": "/Users/hiroon/.nuget/packages/",
-        "outputPath": "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/shoppingCartAPI/shoppingCartAPI/obj/",
+        "outputPath": "/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/hiroon/.nuget/NuGet/NuGet.Config"
