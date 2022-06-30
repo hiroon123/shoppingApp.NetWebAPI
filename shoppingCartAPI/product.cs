@@ -26,19 +26,19 @@ namespace shoppingCartAPI
 
         public float price { get; set; }
 
-        public string img1_url { get; set; } = string.Empty;
+        public string? img1_url { get; set; } = string.Empty;
 
-        public string img2_url { get; set; } = string.Empty;
+        public string? img2_url { get; set; } = string.Empty;
 
-        public string img3_url { get; set; } = string.Empty;
+        public string? img3_url { get; set; } = string.Empty;
 
         public DateTime created { get; set; }
 
         public DateTime modified { get; set; }
 
-        public DateTime deleted { get; set; }
+        public DateTime? deleted { get; set; }
 
-        public Boolean active { get; set; }
+        public bool active { get; set; }
 
     }
 }

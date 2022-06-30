@@ -11,7 +11,7 @@ namespace shoppingCartAPI
         public string cat_name { get; set; } = String.Empty;
 
         [StringLength(150)]
-        public string cat_desc { get; set; } = String.Empty;
+        public string? cat_desc { get; set; } = String.Empty;
 
         [StringLength(50)]
         public DateTime created { get; set; }
@@ -20,7 +20,7 @@ namespace shoppingCartAPI
         public DateTime modified { get; set; }
 
         [StringLength(50)]
-        public DateTime deleted { get; set; }
+        public DateTime? deleted { get; set; }
     }
 }
 

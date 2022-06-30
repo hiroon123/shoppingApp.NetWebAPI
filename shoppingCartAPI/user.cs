@@ -25,7 +25,7 @@ namespace shoppingCartAPI
 
         public DateTime modified { get; set; }
 
-        public DateTime last_login { get; set; }
+        public DateTime? last_login { get; set; }
 
     }
 }

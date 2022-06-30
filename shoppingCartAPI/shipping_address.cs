@@ -24,7 +24,7 @@ namespace shoppingCartAPI
 
         public string telephone { get; set; } = string.Empty;
 
-        public string mobile { get; set; } = string.Empty;
+        public string? mobile { get; set; } = string.Empty;
     }
 }
 
