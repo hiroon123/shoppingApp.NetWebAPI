@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using shoppingCartAPI.Data;
 
@@ -11,9 +12,10 @@ using shoppingCartAPI.Data;
 namespace shoppingCartAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220701134442_AddPasswordHashFields")]
+    partial class AddPasswordHashFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -415,18 +417,6 @@ namespace shoppingCartAPI.Migrations
                     b.Property<byte[]>("passwordSalt")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("password_reset_token")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("reset_token_expires")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("verfied_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("verification_token")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 

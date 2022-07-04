@@ -1,23 +1,18 @@
 ﻿<Properties StartupConfiguration="{6EEBB410-73F0-4A1D-9AC9-56D2F4E6DDD9}|Default">
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.shoppingCartAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="shoppingCartAPI/Controllers/AccessLevelController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="shoppingCartAPI/Controllers/UserController.cs">
     <Files>
-      <File FileName="shoppingCartAPI/Controllers/AdminController.cs" Line="1" Column="1" />
-      <File FileName="shoppingCartAPI/Controllers/AccessLevelController.cs" Line="1" Column="1" />
+      <File FileName="shoppingCartAPI/user_register_request.cs" Line="12" Column="61" />
+      <File FileName="shoppingCartAPI/Controllers/UserController.cs" Line="224" Column="44" />
+      <File FileName="shoppingCartAPI/reset_password_request.cs" Line="15" Column="58" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="shoppingCartAPI" expanded="True">
             <Node name="shoppingCartAPI" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="AccessLevelController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -28,4 +23,8 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
