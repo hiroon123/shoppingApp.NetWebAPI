@@ -14,12 +14,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="MailKit" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Controllers\" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Migrations\" />
+    <None Remove="MailKit" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using shoppingCartAPI;
 using shoppingCartAPI.Data;
 
@@ -26,10 +28,10 @@ namespace shoppingCartAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<user>>> GetUsers()
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
             return await _context.Users.ToListAsync();
         }
 
@@ -37,10 +39,10 @@ namespace shoppingCartAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<user>> Getuser(int id)
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)
@@ -99,7 +101,6 @@ namespace shoppingCartAPI.Controllers
                 email = request.email,
                 passwordHash = passwordHash,
                 passwordSalt = passwordSalt,
-                verification_token = createToken(),
                 first_name = request.first_name,
                 last_name = request.last_name,
                 dob = request.dob,
@@ -109,7 +110,7 @@ namespace shoppingCartAPI.Controllers
             };
 
             _context.Users.Add(user);
-
+            
             await _context.SaveChangesAsync();
 
             return Ok("User Created");
@@ -126,9 +127,64 @@ namespace shoppingCartAPI.Controllers
         }
 
         //Generate Random Token
-        private string createToken()
+        private string createToken(int size)
         {
-            return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+            var random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, size)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        //Send Email Verification Code
+        [HttpPost("SendVerificationEmail")]
+        public async Task<ActionResult> SendEmailVerification(string email_address)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == email_address);
+
+            if(user == null)
+            {
+                return BadRequest("User Not Found");
+            }
+
+            var generated_verification_token = createToken(6);
+
+            user.verification_token = generated_verification_token;
+            user.verfied_at = null;
+
+             _context.SaveChanges();
+
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("desiree.ankunding43@ethereal.email"));
+            email.To.Add(MailboxAddress.Parse(email_address));
+            email.Subject = "Please verify your account";
+
+            string body = "<h4>Your Verification Code: </h4><h6>" + generated_verification_token + "</h6>";
+
+            email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
+
+            using var smtp = new SmtpClient();
+            smtp.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
+            smtp.Authenticate("desiree.ankunding43@ethereal.email", "vy2FzdxKuRepQgAz8z");
+            smtp.Send(email);
+            smtp.Disconnect(true);
+
+            return Ok();
+        }
+
+        //Verify Authentication Token
+        //api/post
+        [HttpPost("VerifyToken")]
+        public async Task<ActionResult> VerifyToken(string email, string token)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == email && u.verification_token == token);
+            if (user == null)
+            {
+                return BadRequest("Invalid Token");
+            }
+            user.verfied_at = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            return Ok("Token Verfied");
         }
 
         // POST: api/User/Login
@@ -138,12 +194,12 @@ namespace shoppingCartAPI.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.email == request.email);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest("User Not Found");
             }
 
-            if(!verifyPasswordHash(request.password, user.passwordHash, user.passwordSalt))
+            if (!verifyPasswordHash(request.password, user.passwordHash, user.passwordSalt))
             {
                 return BadRequest("Wrong Password");
             }
@@ -166,42 +222,43 @@ namespace shoppingCartAPI.Controllers
             }
         }
 
-
-        //Verify Authentication Token
-        //api/post
-        [HttpPost("VerifyToken")]
-        public async Task<ActionResult> VerifyToken(string email, string token)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == email && u.verification_token == token);
-            if(user == null)
-            {
-                return BadRequest("Invalid Token");
-            }
-            user.verfied_at = DateTime.UtcNow;
-            await _context.SaveChangesAsync();
-
-            return Ok("Token Verfied");
-        }
-
-
-        //Forgot Password
+        //Forgot Password -> Send Password Reset Code
         //api/post
         [HttpPost("ForgotPassword")]
-        public async Task<ActionResult> ForgotPassword(string email)
+        public async Task<ActionResult> ForgotPassword(string email_address)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == email);
-            if(user == null)
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == email_address);
+
+            if (user == null)
             {
                 return BadRequest("User Not Found");
             }
-            user.password_reset_token = createToken(); //To-Do -> Check if this token already exists in the DB
-            user.reset_token_expires = DateTime.UtcNow.AddDays(1); // Token Expires in 24hrs
+
+            var generated_reset_token = createToken(15).ToString();
+
+            user.password_reset_token = generated_reset_token;
+            user.reset_token_expires = DateTime.UtcNow.AddDays(1);
+
             await _context.SaveChangesAsync();
 
-            return Ok("Token Sent"); //To-Do -> Send Reset token via email
-            
-        }
 
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("desiree.ankunding43@ethereal.email"));
+            email.To.Add(MailboxAddress.Parse(email_address));
+            email.Subject = "Password verification code";
+
+            string body = "<h4>Your Password Reset Code: </h4><h6>" + generated_reset_token + "</h6>";
+
+            email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
+
+            using var smtp = new SmtpClient();
+            smtp.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
+            smtp.Authenticate("desiree.ankunding43@ethereal.email", "vy2FzdxKuRepQgAz8z");
+            smtp.Send(email);
+            smtp.Disconnect(true);
+
+            return Ok("Token Sent");
+        }
 
         //Reset Password
         //api/post
@@ -209,7 +266,7 @@ namespace shoppingCartAPI.Controllers
         public async Task<ActionResult> ResetPassword(reset_password_request request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.email == request.email && u.password_reset_token == request.token);
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest("Invalid Token");
             }
@@ -221,7 +278,7 @@ namespace shoppingCartAPI.Controllers
             user.reset_token_expires = null;
 
             await _context.SaveChangesAsync();
-            return Ok("Password Resetted");
+            return Ok("Password Reset");
         }
 
         // DELETE: api/User/5

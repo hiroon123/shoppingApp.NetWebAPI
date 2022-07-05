@@ -6,6 +6,7 @@
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/shoppingCartAPI.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/shoppingCartAPI.pdb
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Humanizer.dll
+/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/MailKit.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/MessagePack.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/MessagePack.Annotations.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Razor.Language.dll
@@ -50,6 +51,7 @@
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Microsoft.Win32.SystemEvents.dll
+/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/MimeKit.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Newtonsoft.Json.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/NuGet.Common.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/NuGet.Configuration.dll
@@ -60,6 +62,7 @@
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/NuGet.ProjectModel.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/NuGet.Protocol.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/NuGet.Versioning.dll
+/Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/BouncyCastle.Crypto.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/hiroon/Documents/Virtusa/Projects/Angular Projects/Applications/API/shoppingApp.NetWebAPI/shoppingCartAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
