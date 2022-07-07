@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MimeKit;
 using shoppingCartAPI;
 using shoppingCartAPI.Data;
@@ -18,10 +21,12 @@ namespace shoppingCartAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IConfiguration _configuration;
 
-        public UserController(DataContext context)
+        public UserController(DataContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: api/User
@@ -113,7 +118,7 @@ namespace shoppingCartAPI.Controllers
             
             await _context.SaveChangesAsync();
 
-            return Ok("User Created");
+            return Ok();
         }
 
         //Generate Password Hash and Salt
@@ -209,7 +214,9 @@ namespace shoppingCartAPI.Controllers
                 return BadRequest("Not Verified");
             }
 
-            return Ok("Success");
+            string token = createJWT(user);
+
+            return Ok();
         }
 
         //Check Password Hash and Salt
@@ -220,6 +227,28 @@ namespace shoppingCartAPI.Controllers
                 var computedPasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedPasswordHash.SequenceEqual(passwordHash);
             }
+        }
+
+        //Create JSON Web Token
+        private string createJWT(user user)
+        {
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.email)
+            };
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+                _configuration.GetSection("AppSettings:JWTkey").Value));
+
+            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var token = new JwtSecurityToken(
+                claims:claims,
+                expires:DateTime.Now.AddDays(1),
+                signingCredentials:cred);
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
         }
 
         //Forgot Password -> Send Password Reset Code
